@@ -1,0 +1,92 @@
+{
+  "configuracion": {
+    "version": "1.0",
+    "ultima_actualizacion": "2025-01-20T00:00:00.000Z",
+    "total_usuarios": 0,
+    "total_reportes": 0,
+    "reduccion_residuos": 0
+  },
+  "puntos_reciclaje": [
+    {
+      "id": 1,
+      "nombre": "Alameda Principal",
+      "tipo": "mixto",
+      "estado": "activo",
+      "capacidad_actual": 0,
+      "capacidad_maxima": 100,
+      "ubicacion": { "x": 20, "y": 25 },
+      "reportes": 0,
+      "ultima_actualizacion": "2025-01-20T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "nombre": "Parquesoft - Entrada",
+      "tipo": "papel",
+      "estado": "activo",
+      "capacidad_actual": 0,
+      "capacidad_maxima": 80,
+      "ubicacion": { "x": 70, "y": 40 },
+      "reportes": 0,
+      "ultima_actualizacion": "2025-01-20T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "nombre": "Cafetería Central",
+      "tipo": "organico",
+      "estado": "activo",
+      "capacidad_actual": 0,
+      "capacidad_maxima": 120,
+      "ubicacion": { "x": 45, "y": 65 },
+      "reportes": 0,
+      "ultima_actualizacion": "2025-01-20T00:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "nombre": "Entrada Principal",
+      "tipo": "mixto",
+      "estado": "activo",
+      "capacidad_actual": 0,
+      "capacidad_maxima": 90,
+      "ubicacion": { "x": 15, "y": 75 },
+      "reportes": 0,
+      "ultima_actualizacion": "2025-01-20T00:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "nombre": "Estacionamiento",
+      "tipo": "plastico",
+      "estado": "activo",
+      "capacidad_actual": 0,
+      "capacidad_maxima": 70,
+      "ubicacion": { "x": 80, "y": 80 },
+      "reportes": 0,
+      "ultima_actualizacion": "2025-01-20T00:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "nombre": "Biblioteca",
+      "tipo": "papel",
+      "estado": "activo",
+      "capacidad_actual": 0,
+      "capacidad_maxima": 60,
+      "ubicacion": { "x": 60, "y": 20 },
+      "reportes": 0,
+      "ultima_actualizacion": "2025-01-20T00:00:00.000Z"
+    }
+  ],
+  "reportes": [],
+  "usuarios": [],
+  "estadisticas": {
+    "reportes_mes_actual": 0,
+    "reportes_resueltos": 0,
+    "participantes_activos": 0,
+    "eficiencia_sistema": 0,
+    "impacto_ambiental": {
+      "arboles_salvados": 0,
+      "energia_ahorrada_kwh": 0,
+      "agua_conservada_litros": 0,
+      "co2_reducido_kg": 0
+    }
+  },
+  "log_actividad": []
+}

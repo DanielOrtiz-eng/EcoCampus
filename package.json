@@ -1,0 +1,9 @@
+{
+  "name": "ecocampus-uniajc",
+  "version": "1.0.0",
+  "description": "Sistema de Gestión de Residuos - Universidad Antonio José Camacho",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Build completo'"
+  }
+}

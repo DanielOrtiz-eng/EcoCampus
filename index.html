@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCampus - Gestión Inteligente de Residuos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🌱 EcoCampus UNIAJC</h1>
+            <p>Sistema de Gestión de Residuos Sólidos - Campus Universitario</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#reportar">Reportar</a></li>
+                <li><a href="#aprender">Aprender</a></li>
+                <li><a href="#mapa">Mapa</a></li>
+                <li><a href="#progreso">Progreso</a></li>
+                <li><a href="#estadisticas">Estadísticas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- SECCIÓN INICIO -->
+        <section id="inicio" class="section active">
+            <h2>Bienvenido al Sistema EcoCampus</h2>
+            <p class="intro-text">Sistema colaborativo para la gestión inteligente de residuos en la Universidad Antonio José Camacho</p>
+            
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <h3 id="stats-total-reportes">0</h3>
+                    <p>Reportes Activos</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="stats-puntos-activos">0</h3>
+                    <p>Puntos de Reciclaje</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="stats-participantes">0</h3>
+                    <p>Estudiantes Participando</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="stats-reduccion">0%</h3>
+                    <p>Reducción de Residuos</p>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <h3>📝 Reportar en Tiempo Real</h3>
+                    <p>Reporta problemas, sugiere mejoras y contribuye al mantenimiento del campus</p>
+                    <button class="btn-small" onclick="mostrarSeccion('reportar')">Reportar Ahora</button>
+                </div>
+                <div class="feature-card">
+                    <h3>📚 Centro de Aprendizaje</h3>
+                    <p>Aprende sobre reciclaje, compostaje y prácticas sostenibles universitarias</p>
+                    <button class="btn-small" onclick="mostrarSeccion('aprender')">Aprender Más</button>
+                </div>
+                <div class="feature-card">
+                    <h3>🗺 Mapa Interactivo</h3>
+                    <p>Ubica todos los puntos de reciclaje y conoce su estado en tiempo real</p>
+                    <button class="btn-small" onclick="mostrarSeccion('mapa')">Ver Mapa</button>
+                </div>
+            </div>
+
+            <div class="alertas-rapidas">
+                <h3>🚨 Alertas Recientes</h3>
+                <div id="alertas-container" class="alertas-container">
+                    <p>Cargando alertas del campus...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN REPORTAR -->
+        <section id="reportar" class="section">
+            <h2>📝 Sistema de Reportes</h2>
+            <p class="section-description">Reporta problemas, sugiere mejoras o nuevos puntos de reciclaje</p>
+            
+            <form id="reportForm" class="form">
+                <div class="form-group">
+                    <label for="tipo">Tipo de Reporte:</label>
+                    <select id="tipo" required>
+                        <option value="">Selecciona el tipo de reporte</option>
+                        <option value="contenedor_lleno">🚮 Contenedor lleno</option>
+                        <option value="contenedor_danado">⚠ Contenedor dañado</option>
+                        <option value="residuos_mezclados">🔀 Residuos mezclados incorrectamente</option>
+                        <option value="nuevo_punto">💡 Sugerir nuevo punto de reciclaje</option>
+                        <option value="limpieza_requerida">🧹 Solicitar limpieza de área</option>
+                        <option value="otro">❓ Otro problema</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ubicacion">Ubicación en el Campus:</label>
+                    <select id="ubicacion" required>
+                        <option value="">Selecciona una ubicación</option>
+                        <option value="bloque_a">🏢 Bloque A - Planta Baja</option>
+                        <option value="bloque_b">🏢 Bloque B - Entrada Principal</option>
+                        <option value="bloque_c">🏢 Bloque C - Pasillo Central</option>
+                        <option value="cafeteria_principal">🍽 Cafetería Principal</option>
+                        <option value="biblioteca">📚 Biblioteca - Recepción</option>
+                        <option value="patio_central">🌳 Patio Central</option>
+                        <option value="canchas_deportivas">⚽ Canchas Deportivas</option>
+                        <option value="entrada_principal">🚪 Entrada Principal</option>
+                        <option value="parqueadero">🅿 Parqueadero Principal</option>
+                        <option value="otra">📍 Otra ubicación</option>
+                    </select>
+                </div>
+
+                <div id="otraUbicacionGroup" class="form-group hidden">
+                    <label for="otra_ubicacion">Especifica la ubicación exacta:</label>
+                    <input type="text" id="otra_ubicacion" placeholder="Ej: Frente al laboratorio de computación, segundo piso...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="descripcion">Descripción Detallada:</label>
+                    <textarea id="descripcion" rows="4" placeholder="Describe el problema o sugerencia con el mayor detalle posible..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="urgencia">Nivel de Urgencia:</label>
+                    <select id="urgencia">
+                        <option value="baja">🟢 Baja - Mejora general</option>
+                        <option value="media">🟡 Media - Problema que afecta funcionamiento</option>
+                        <option value="alta">🔴 Alta - Riesgo o problema crítico</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn">📤 Enviar Reporte al Sistema</button>
+            </form>
+
+            <div id="mensajeExito" class="mensaje-exito hidden">
+                <p>✅ ¡Reporte enviado con éxito! Se ha registrado en el sistema.</p>
+            </div>
+
+            <div class="mis-reportes">
+                <h3>📋 Mis Reportes Recientes</h3>
+                <div id="mis-reportes-container" class="reportes-container">
+                    <p>No has enviado reportes aún</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN APRENDER -->
+        <section id="aprender" class="section">
+            <h2>📚 Centro de Aprendizaje EcoCampus</h2>
+            <p class="section-description">Recursos educativos para una gestión sostenible de residuos</p>
+
+            <div class="categorias-reciclaje">
+                <div class="categoria-card plastico">
+                    <h3>🔵 Plásticos y Envases</h3>
+                    <div class="categoria-content">
+                        <h4>✅ Se acepta:</h4>
+                        <ul>
+                            <li>Botellas PET (agua, bebidas)</li>
+                            <li>Envases de alimentos limpios</li>
+                            <li>Bolsas plásticas limpias</li>
+                            <li>Envases de productos de limpieza</li>
+                        </ul>
+                        <h4>❌ No se acepta:</h4>
+                        <ul>
+                            <li>Envases con residuos de comida</li>
+                            <li>Juguetes plásticos</li>
+                            <li>Utensilios desechables sucios</li>
+                            <li>Embalajes de tecnopor</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="categoria-card papel">
+                    <h3>📄 Papel y Cartón</h3>
+                    <div class="categoria-content">
+                        <h4>✅ Se acepta:</h4>
+                        <ul>
+                            <li>Periódicos y revistas</li>
+                            <li>Cajas de cartón limpias</li>
+                            <li>Papel de oficina y cuadernos</li>
+                            <li>Folletos publicitarios</li>
+                        </ul>
+                        <h4>❌ No se acepta:</h4>
+                        <ul>
+                            <li>Papel higiénico o servilletas</li>
+                            <li>Papel encerado o plastificado</li>
+                            <li>Cajas con restos de comida</li>
+                            <li>Papel carbón o thermal</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="categoria-card vidrio">
+                    <h3>🥫 Vidrio y Metales</h3>
+                    <div class="categoria-content">
+                        <h4>✅ Se acepta:</h4>
+                        <ul>
+                            <li>Botellas de vidrio transparente</li>
+                            <li>Frascos de alimentos limpios</li>
+                            <li>Latas de aluminio y hojalata</li>
+                            <li>Envases metálicos limpios</li>
+                        </ul>
+                        <h4>❌ No se acepta:</h4>
+                        <ul>
+                            <li>Vidrios rotos o espejos</li>
+                            <li>Bombillos o focos</li>
+                            <li>Cerámica o loza</li>
+                            <li>Envases con líquidos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="consejos-adicionales">
+                <h3>💡 Buenas Prácticas en el Campus</h3>
+                <div class="consejos-grid">
+                    <div class="consejo-item">
+                        <h4>🧼 Limpieza Previa</h4>
+                        <p>Enjuaga los envases antes de depositarlos para evitar malos olores y contaminación</p>
+                    </div>
+                    <div class="consejo-item">
+                        <h4>📦 Compactación</h4>
+                        <p>Aplasta las botellas y cajas para optimizar el espacio en los contenedores</p>
+                    </div>
+                    <div class="consejo-item">
+                        <h4>🏷 Separación Correcta</h4>
+                        <p>Verifica que cada residuo vaya en el contenedor correspondiente</p>
+                    </div>
+                    <div class="consejo-item">
+                        <h4>🔍 Reporte Oportuno</h4>
+                        <p>Reporta contenedores llenos o dañados para mantener el sistema eficiente</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="estadisticas-ambientales">
+                <h3>🌍 Impacto Ambiental de tu Contribución</h3>
+                <div class="impacto-grid">
+                    <div class="impacto-item">
+                        <h4>🌲 Árboles Salvados</h4>
+                        <p id="arboles-salvados">0</p>
+                    </div>
+                    <div class="impacto-item">
+                        <h4>⚡ Energía Ahorrada</h4>
+                        <p id="energia-ahorrada">0 kWh</p>
+                    </div>
+                    <div class="impacto-item">
+                        <h4>💧 Agua Conservada</h4>
+                        <p id="agua-conservada">0 litros</p>
+                    </div>
+                    <div class="impacto-item">
+                        <h4>🏭 CO₂ Reducido</h4>
+                        <p id="co2-reducido">0 kg</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN MAPA -->
+        <section id="mapa" class="section">
+            <h2>🗺 Mapa Interactivo del Campus</h2>
+            <p class="section-description">Ubicación en tiempo real de todos los puntos de reciclaje y su estado actual</p>
+
+            <div class="controles-mapa">
+                <button class="btn-small" onclick="filtrarPuntos('todos')">Todos</button>
+                <button class="btn-small" onclick="filtrarPuntos('activos')">Activos</button>
+                <button class="btn-small" onclick="filtrarPuntos('problemas')">Con Problemas</button>
+                <button class="btn-small" onclick="actualizarMapa()">🔄 Actualizar</button>
+            </div>
+
+            <div class="mapa-container">
+                <div class="mapa-simplificado" id="mapa-interactivo">
+                    <!-- Los puntos se generan dinámicamente con JavaScript -->
+                </div>
+            </div>
+
+            <div class="leyenda-mapa">
+                <h3>Leyenda del Sistema</h3>
+                <div class="leyenda-items">
+                    <div class="leyenda-item">
+                        <div class="color-indicador activo"></div>
+                        <span>Punto operativo</span>
+                    </div>
+                    <div class="leyenda-item">
+                        <div class="color-indicador inactivo"></div>
+                        <span>Necesita atención</span>
+                    </div>
+                    <div class="leyenda-item">
+                        <div class="color-indicador lleno"></div>
+                        <span>Contenedor lleno</span>
+                    </div>
+                    <div class="leyenda-item">
+                        <div class="color-indicador nuevo"></div>
+                        <span>Nuevo punto sugerido</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lista-puntos">
+                <h3>📋 Inventario de Puntos de Reciclaje</h3>
+                <div class="busqueda-container">
+                    <input type="text" id="busqueda-puntos" placeholder="🔍 Buscar punto por nombre..." onkeyup="filtrarListaPuntos()">
+                </div>
+                <div id="lista-puntos-detallada" class="puntos-lista">
+                    <p>Cargando puntos de reciclaje...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PROGRESO -->
+        <section id="progreso" class="section">
+            <h2>📊 Dashboard de Progreso</h2>
+            <p class="section-description">Métricas en tiempo real del impacto del sistema EcoCampus</p>
+
+            <div class="estadisticas-principales">
+                <div class="estadistica-card">
+                    <h3>📈 Reportes del Mes</h3>
+                    <div class="numero-grande" id="reportes-mes">0</div>
+                    <p>Reportes registrados este mes</p>
+                </div>
+                <div class="estadistica-card">
+                    <h3>📉 Eficiencia del Sistema</h3>
+                    <div class="numero-grande" id="eficiencia-sistema">0%</div>
+                    <p>Tasa de resolución de reportes</p>
+                </div>
+                <div class="estadistica-card">
+                    <h3>👥 Participación Activa</h3>
+                    <div class="numero-grande" id="participacion-activa">0</div>
+                    <p>Usuarios activos esta semana</p>
+                </div>
+            </div>
+
+            <div class="graficos-container">
+                <div class="grafico-section">
+                    <h3>📅 Reportes por Día (Últimos 7 días)</h3>
+                    <div id="grafico-reportes" class="grafico-barras">
+                        <!-- Generado por JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="grafico-section">
+                    <h3>📊 Distribución por Tipo de Reporte</h3>
+                    <div id="grafico-tipos" class="grafico-torta">
+                        <!-- Generado por JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="reportes-recientes">
+                <h3>🔄 Actividad Reciente del Sistema</h3>
+                <div class="filtros-reportes">
+                    <button class="btn-small active" onclick="filtrarReportesGlobales('todos')">Todos</button>
+                    <button class="btn-small" onclick="filtrarReportesGlobales('resueltos')">Resueltos</button>
+                    <button class="btn-small" onclick="filtrarReportesGlobales('pendientes')">Pendientes</button>
+                </div>
+                <div class="lista-reportes" id="listaReportes">
+                    <p>Cargando actividad del sistema...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN: ESTADÍSTICAS AVANZADAS -->
+        <section id="estadisticas" class="section">
+            <h2>📈 Centro de Datos y Analytics</h2>
+            <p class="section-description">Análisis detallado y métricas avanzadas del sistema EcoCampus</p>
+
+            <div class="metricas-avanzadas">
+                <div class="metrica-card">
+                    <h3>🕒 Tiempo Promedio de Respuesta</h3>
+                    <div class="metrica-valor" id="tiempo-respuesta">0h</div>
+                    <p>Desde reporte hasta atención</p>
+                </div>
+                <div class="metrica-card">
+                    <h3>📞 Satisfacción del Usuario</h3>
+                    <div class="metrica-valor" id="satisfaccion-usuario">0%</div>
+                    <p>Basado en feedback recibido</p>
+                </div>
+                <div class="metrica-card">
+                    <h3>🌱 Huella de Carbón Reducida</h3>
+                    <div class="metrica-valor" id="huella-carbon">0 kg</div>
+                    <p>CO₂ equivalente no emitido</p>
+                </div>
+            </div>
+
+            <div class="exportar-datos">
+                <h3>💾 Exportación de Datos</h3>
+                <p>Descarga los datos del sistema para análisis externos</p>
+                <div class="botones-exportacion">
+                    <button class="btn" onclick="exportarDatos('json')">📄 Exportar JSON</button>
+                    <button class="btn" onclick="exportarDatos('csv')">📊 Exportar CSV</button>
+                    <button class="btn" onclick="generarReportePDF()">📋 Generar Reporte PDF</button>
+                </div>
+            </div>
+
+            <div class="configuracion-sistema">
+                <h3>⚙ Configuración del Sistema</h3>
+                <div class="config-opciones">
+                    <label>
+                        <input type="checkbox" id="auto-actualizar" checked>
+                        Auto-actualización cada 30 segundos
+                    </label>
+                    <label>
+                        <input type="checkbox" id="notificaciones" checked>
+                        Notificaciones del sistema
+                    </label>
+                    <label>
+                        <input type="checkbox" id="modo-oscuro">
+                        Modo oscuro (próximamente)
+                    </label>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>♻ EcoCampus UNIAJC</h4>
+                    <p>Sistema de Gestión Inteligente de Residuos</p>
+                    <p>Institución Universitaria Antonio José Camacho</p>
+                </div>
+                <div class="footer-section">
+                    <h4>👥 Equipo de Desarrollo</h4>
+                    <p>Aní Tatiana Castillo Balanta</p>
+                    <p>Edwin Daniel Ortiz Valladales</p>
+                    <p>Javier Possu Collazos</p>
+                    <p>Julián Andrés Ortega Rivera</p>
+                </div>
+                <div class="footer-section">
+                    <h4>📞 Contacto</h4>
+                    <p>📧 ecocampus@uniajc.edu.co</p>
+                    <p>🌐 www.uniajc.edu.co</p>
+                    <p>📍 Cali, Colombia</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EcoCampus UNIAJC. Todos los derechos reservados.</p>
+                <p>Proyecto de Liderazgo y Emprendimiento - Docente: Vivian Andrea Rodríguez Yopasa</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+</body>
+</html>
