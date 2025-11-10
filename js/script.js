@@ -768,3 +768,275 @@ style.textContent = `
 document.head.appendChild(style);
 
 console.log('🚀 EcoCampus Netlify - Sistema completo cargado');
+// Sistema de Avisos y Estado
+function mostrarAvisoSistema() {
+    const aviso = document.getElementById('aviso-sistema');
+    if (aviso) {
+        // Mostrar aviso solo si no estaba cerrado previamente
+        const avisoCerrado = localStorage.getItem('aviso_sistema_cerrado');
+        if (!avisoCerrado) {
+            aviso.style.display = 'block';
+        }
+    }
+}
+
+function cerrarAviso() {
+    const aviso = document.getElementById('aviso-sistema');
+    if (aviso) {
+        aviso.classList.add('cerrando');
+        setTimeout(() => {
+            aviso.style.display = 'none';
+            localStorage.setItem('aviso_sistema_cerrado', 'true');
+        }, 500);
+    }
+}
+
+function mostrarEstadoSistema(seccion) {
+    const contenedores = document.querySelectorAll('.estado-sistema-container');
+    contenedores.forEach(container => container.remove());
+
+    let mensaje = '';
+    
+    switch(seccion) {
+        case 'mapa':
+            mensaje = crearEstadoMapa();
+            break;
+        case 'reportar':
+            mensaje = crearEstadoReportes();
+            break;
+        case 'progreso':
+            mensaje = crearEstadoProgreso();
+            break;
+        case 'admin-puntos':
+            mensaje = crearEstadoAdmin();
+            break;
+        default:
+            mensaje = crearEstadoGeneral();
+    }
+
+    const seccionElement = document.getElementById(seccion);
+    if (seccionElement) {
+        seccionElement.insertAdjacentHTML('afterbegin', mensaje);
+    }
+}
+
+function crearEstadoGeneral() {
+    return `
+        <div class="estado-sistema-container">
+            <div class="estado-sistema">
+                <div class="estado-header">
+                    <div class="estado-icon">🌐</div>
+                    <h4 class="estado-title">Estado del Sistema EcoCampus</h4>
+                </div>
+                <div class="estado-content">
+                    <p><strong>Modo Local Activado</strong> - Esta instancia funciona con almacenamiento en tu navegador.</p>
+                    
+                    <div class="estado-features">
+                        <p><strong>Funcionalidades disponibles:</strong></p>
+                        <ul>
+                            <li>✅ Reportar problemas y sugerencias</li>
+                            <li>✅ Ver mapa interactivo de puntos</li>
+                            <li>✅ Gestionar puntos de reciclaje</li>
+                            <li>✅ Ver estadísticas locales</li>
+                            <li>✅ Centro de aprendizaje</li>
+                        </ul>
+                        
+                        <p><strong>Limitaciones actuales:</strong></p>
+                        <ul>
+                            <li>📱 Los datos no se sincronizan entre dispositivos</li>
+                            <li>🌐 No hay conexión con servicios en la nube</li>
+                            <li>👥 Los reportes son visibles solo localmente</li>
+                            <li>📊 Las estadísticas no se comparten globalmente</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="estado-actions">
+                        <button class="btn-small" onclick="exportarRespaldo()">💾 Exportar Respaldo</button>
+                        <button class="btn-small" onclick="importarRespaldo()">📥 Importar Datos</button>
+                        <button class="btn-small" onclick="resetearDatos()">🔄 Resetear Sistema</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function crearEstadoMapa() {
+    return `
+        <div class="estado-sistema-container">
+            <div class="estado-sistema info">
+                <div class="estado-header">
+                    <div class="estado-icon">🗺️</div>
+                    <h4 class="estado-title">Mapa Interactivo - Modo Local</h4>
+                </div>
+                <div class="estado-content">
+                    <p>Los puntos de reciclaje mostrados están almacenados localmente en tu navegador.</p>
+                    <ul>
+                        <li><strong>Puntos activos:</strong> ${datosGlobales.puntosReciclaje.length}</li>
+                        <li><strong>Última actualización:</strong> ${new Date().toLocaleDateString()}</li>
+                        <li><strong>Alcance:</strong> Solo visible en este dispositivo</li>
+                    </ul>
+                    <p>Para gestionar los puntos, ve a la sección <strong>"Admin Puntos"</strong> en el menú.</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function crearEstadoReportes() {
+    return `
+        <div class="estado-sistema-container">
+            <div class="estado-sistema">
+                <div class="estado-header">
+                    <div class="estado-icon">📝</div>
+                    <h4 class="estado-title">Sistema de Reportes - Almacenamiento Local</h4>
+                </div>
+                <div class="estado-content">
+                    <p>Los reportes que envías se guardan en tu navegador y no se envían a un servidor central.</p>
+                    
+                    <div class="estado-features">
+                        <p><strong>Información importante:</strong></p>
+                        <ul>
+                            <li>📊 Total de reportes locales: ${datosGlobales.reportes.length}</li>
+                            <li>🔒 Tus datos son privados en este dispositivo</li>
+                            <li>📤 Puedes exportar tus reportes para respaldo</li>
+                            <li>⚠️ Los reportes no llegan al personal administrativo</li>
+                        </ul>
+                    </div>
+                    
+                    <p><em>Esta es una versión de demostración. En producción, los reportes llegarían al equipo de mantenimiento.</em></p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function crearEstadoAdmin() {
+    return `
+        <div class="estado-sistema-container">
+            <div class="estado-sistema success">
+                <div class="estado-header">
+                    <div class="estado-icon">⚙️</div>
+                    <h4 class="estado-title">Panel de Administración - Edición Local</h4>
+                </div>
+                <div class="estado-content">
+                    <p>Puedes gestionar completamente los puntos de reciclaje, pero los cambios solo se aplican localmente.</p>
+                    
+                    <div class="estado-features">
+                        <p><strong>Operaciones disponibles:</strong></p>
+                        <ul>
+                            <li>➕ Agregar nuevos puntos de reciclaje</li>
+                            <li>✏️ Editar puntos existentes</li>
+                            <li>🗑️ Eliminar puntos</li>
+                            <li>📍 Reposicionar en el mapa</li>
+                            <li>📊 Actualizar estados y capacidades</li>
+                        </ul>
+                    </div>
+                    
+                    <p><strong>Nota:</strong> Los cambios no se reflejarán en otros dispositivos o usuarios.</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Funciones de utilidad para el modo local
+function exportarRespaldo() {
+    const datosExportar = {
+        ...datosGlobales,
+        metadata: {
+            fecha_exportacion: new Date().toISOString(),
+            version: '1.0',
+            total_puntos: datosGlobales.puntosReciclaje.length,
+            total_reportes: datosGlobales.reportes.length
+        }
+    };
+    
+    const datosStr = JSON.stringify(datosExportar, null, 2);
+    const blob = new Blob([datosStr], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ecocampus_respaldo_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    
+    mostrarNotificacion('💾 Respaldo exportado correctamente', 'exito');
+}
+
+function importarRespaldo() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    
+    input.onchange = e => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = event => {
+            try {
+                const datosImportados = JSON.parse(event.target.result);
+                
+                // Validar estructura básica
+                if (datosImportados.puntosReciclaje && datosImportados.reportes) {
+                    datosGlobales = datosImportados;
+                    localStorage.setItem('ecocampus_datos_respaldo', JSON.stringify(datosGlobales));
+                    actualizarUI();
+                    mostrarNotificacion('📥 Datos importados correctamente', 'exito');
+                } else {
+                    throw new Error('Formato de archivo inválido');
+                }
+            } catch (error) {
+                mostrarNotificacion('❌ Error al importar el archivo', 'error');
+            }
+        };
+        
+        reader.readAsText(file);
+    };
+    
+    input.click();
+}
+
+function resetearDatos() {
+    if (confirm('¿Estás seguro de que quieres resetear todos los datos? Esta acción no se puede deshacer.')) {
+        localStorage.removeItem('ecocampus_datos_respaldo');
+        location.reload();
+    }
+}
+
+// Modificar la función mostrarSeccion para incluir el estado del sistema
+function mostrarSeccion(idSeccion) {
+    console.log('🔄 Mostrando sección: ' + idSeccion);
+    
+    // Ocultar todas las secciones
+    var secciones = document.querySelectorAll('.section');
+    for (var i = 0; i < secciones.length; i++) {
+        secciones[i].classList.remove('active');
+    }
+
+    // Mostrar sección seleccionada
+    var seccion = document.getElementById(idSeccion);
+    if (seccion) {
+        seccion.classList.add('active');
+        
+        // Mostrar estado del sistema para la sección
+        mostrarEstadoSistema(idSeccion);
+        
+        // Acciones específicas por sección
+        if (idSeccion === 'mapa') {
+            dibujarMapaReal();
+        } else if (idSeccion === 'progreso') {
+            actualizarEstadisticasAvanzadas();
+        } else if (idSeccion === 'estadisticas') {
+            actualizarMetricasAvanzadas();
+        } else if (idSeccion === 'admin-puntos' && typeof adminPuntos !== 'undefined') {
+            adminPuntos.cargarPuntosEnAdmin();
+        }
+    }
+}
+
+// Inicializar avisos cuando carga la página
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🌱 Iniciando EcoCampus en Netlify...');
+    iniciarSistemaNetlify();
+    mostrarAvisoSistema(); // ← Agregar esta línea
+});

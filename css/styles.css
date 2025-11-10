@@ -963,3 +963,473 @@ footer {
         padding: 2rem 0;
     }
 }
+/* ===== ESTILOS PARA ADMINISTRACIÓN DE PUNTOS ===== */
+
+.admin-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.admin-form {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.admin-mapa {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.mapa-posicionamiento {
+    position: relative;
+    height: 400px;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border: 3px dashed var(--accent-color);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    cursor: crosshair;
+    overflow: hidden;
+}
+
+.mapa-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, #81c784 0%, #81c784 2%, transparent 2%),
+        radial-gradient(circle at 70% 40%, #81c784 0%, #81c784 2%, transparent 2%),
+        radial-gradient(circle at 45% 65%, #81c784 0%, #81c784 3%, transparent 3%),
+        radial-gradient(circle at 15% 75%, #81c784 0%, #81c784 2%, transparent 2%),
+        radial-gradient(circle at 80% 80%, #81c784 0%, #81c784 2%, transparent 2%),
+        radial-gradient(circle at 60% 20%, #81c784 0%, #81c784 2%, transparent 2%);
+}
+
+.edificios {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.edificio {
+    position: absolute;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.coordenadas-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6c757d, #495057);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #5a6268, #343a40);
+}
+
+.punto-admin {
+    transition: all 0.3s ease;
+}
+
+.punto-mapa-admin {
+    font-size: 2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background: var(--white);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border: 3px solid;
+    cursor: move;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.punto-mapa-admin:hover {
+    transform: scale(1.3);
+    z-index: 100;
+}
+
+.punto-admin.activo .punto-mapa-admin {
+    border-color: var(--accent-color);
+    background: var(--light-green);
+}
+
+.punto-admin.inactivo .punto-mapa-admin {
+    border-color: #f44336;
+    background: #ffebee;
+}
+
+.punto-admin.lleno .punto-mapa-admin {
+    border-color: #ff9800;
+    background: #fff3e0;
+}
+
+.punto-admin.mantenimiento .punto-mapa-admin {
+    border-color: #9c27b0;
+    background: #f3e5f5;
+}
+
+.tooltip-admin {
+    display: none;
+    position: absolute;
+    background: var(--text-color);
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.punto-mapa-admin:hover .tooltip-admin {
+    display: block;
+}
+
+.instrucciones {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+/* Lista de puntos admin */
+.lista-puntos-admin {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-top: 2rem;
+}
+
+.tabla-container {
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+.tabla-puntos {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+}
+
+.tabla-puntos th,
+.tabla-puntos td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.tabla-puntos th {
+    background: var(--light-green);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.tabla-puntos tr:hover {
+    background: var(--gray-light);
+}
+
+/* Badges para tipos y estados */
+.badge-tipo {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.badge-tipo.mixto {
+    background: #e8f5e9;
+    color: var(--primary-color);
+}
+
+.badge-tipo.papel {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.badge-tipo.plastico {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.badge-tipo.organico {
+    background: #f1f8e9;
+    color: #7cb342;
+}
+
+.badge-tipo.vidrio {
+    background: #efebe9;
+    color: #6d4c41;
+}
+
+.badge-estado {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.badge-estado.activo {
+    background: #e8f5e9;
+    color: var(--primary-color);
+}
+
+.badge-estado.inactivo {
+    background: #ffebee;
+    color: #f44336;
+}
+
+.badge-estado.lleno {
+    background: #fff3e0;
+    color: #ff9800;
+}
+
+.badge-estado.mantenimiento {
+    background: #f3e5f5;
+    color: #9c27b0;
+}
+
+.acciones-tabla {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-editar {
+    background: var(--accent-color);
+    color: white;
+}
+
+.btn-eliminar {
+    background: #f44336;
+    color: white;
+}
+
+.btn-editar:hover {
+    background: var(--secondary-color);
+}
+
+.btn-eliminar:hover {
+    background: #d32f2f;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .admin-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .coordenadas-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-buttons {
+        flex-direction: column;
+    }
+    
+    .acciones-tabla {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .tabla-puntos {
+        font-size: 0.8rem;
+    }
+    
+    .tabla-puntos th,
+    .tabla-puntos td {
+        padding: 0.5rem;
+    }
+}/* ===== ESTILOS PARA SISTEMA DE AVISOS ===== */
+
+.aviso-sistema {
+    padding: 1rem 0;
+    position: relative;
+    z-index: 1001;
+    animation: slideDown 0.5s ease;
+}
+
+.aviso-importante {
+    background: linear-gradient(135deg, #fff3e0, #ffecb3);
+    border-bottom: 3px solid #ff9800;
+}
+
+.aviso-info {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-bottom: 3px solid #2196f3;
+}
+
+.aviso-success {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-bottom: 3px solid #4caf50;
+}
+
+.aviso-warning {
+    background: linear-gradient(135deg, #ffebee, #ffcdd2);
+    border-bottom: 3px solid #f44336;
+}
+
+.aviso-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.aviso-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.aviso-text {
+    flex: 1;
+}
+
+.aviso-text strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+.aviso-text p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.aviso-text small {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.aviso-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.aviso-close:hover {
+    background: rgba(0,0,0,0.1);
+    color: #333;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.aviso-sistema.cerrando {
+    animation: slideUp 0.5s ease forwards;
+}
+
+/* Banner de estado en páginas específicas */
+.estado-sistema {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin: 1rem 0;
+    border-left: 4px solid #ff9800;
+}
+
+.estado-sistema.info {
+    border-left-color: #2196f3;
+}
+
+.estado-sistema.success {
+    border-left-color: #4caf50;
+}
+
+.estado-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.estado-icon {
+    font-size: 1.25rem;
+}
+
+.estado-title {
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.estado-content {
+    color: #666;
+    line-height: 1.5;
+}
+
+.estado-features {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+}
+
+.estado-features li {
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.estado-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}

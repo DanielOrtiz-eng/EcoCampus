@@ -13,7 +13,20 @@
             <p>Sistema de Gestión de Residuos Sólidos - Campus Universitario</p>
         </div>
     </header>
-
+    <!-- Agrega esto JUSTO DESPUÉS del <header> y ANTES del <nav> -->
+<div id="aviso-sistema" class="aviso-sistema aviso-importante">
+    <div class="container">
+        <div class="aviso-content">
+            <div class="aviso-icon">⚠️</div>
+            <div class="aviso-text">
+                <strong>Modo Local Activado</strong>
+                <p>Esta versión funciona con almacenamiento local. Los datos se guardan en tu navegador y no en la nube.</p>
+                <small>Para una experiencia completa con sincronización en la nube, contacta al administrador del sistema.</small>
+            </div>
+            <button class="aviso-close" onclick="cerrarAviso()">×</button>
+        </div>
+    </div>
+</div>
     <nav>
         <div class="container">
             <ul class="nav-menu">
@@ -23,6 +36,7 @@
                 <li><a href="#mapa">Mapa</a></li>
                 <li><a href="#progreso">Progreso</a></li>
                 <li><a href="#estadisticas">Estadísticas</a></li>
+                <li><a href="#admin-puntos">Admin Puntos</a></li>
             </ul>
         </div>
     </nav>
@@ -77,8 +91,7 @@
                 </div>
             </div>
         </section>
-
-        <!-- SECCIÓN REPORTAR -->
+                <!-- SECCIÓN REPORTAR -->
         <section id="reportar" class="section">
             <h2>📝 Sistema de Reportes</h2>
             <p class="section-description">Reporta problemas, sugiere mejoras o nuevos puntos de reciclaje</p>
@@ -310,8 +323,7 @@
                 </div>
             </div>
         </section>
-
-        <!-- SECCIÓN PROGRESO -->
+                <!-- SECCIÓN PROGRESO -->
         <section id="progreso" class="section">
             <h2>📊 Dashboard de Progreso</h2>
             <p class="section-description">Métricas en tiempo real del impacto del sistema EcoCampus</p>
@@ -363,7 +375,7 @@
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN: ESTADÍSTICAS AVANZADAS -->
+        <!-- SECCIÓN ESTADÍSTICAS -->
         <section id="estadisticas" class="section">
             <h2>📈 Centro de Datos y Analytics</h2>
             <p class="section-description">Análisis detallado y métricas avanzadas del sistema EcoCampus</p>
@@ -414,9 +426,106 @@
                 </div>
             </div>
         </section>
-    </main>
 
-    <footer>
+        <!-- SECCIÓN ADMINISTRACIÓN DE PUNTOS -->
+        <section id="admin-puntos" class="section">
+            <h2>⚙️ Administrar Puntos de Reciclaje</h2>
+            <p class="section-description">Agregar, editar o eliminar puntos de reciclaje en el mapa</p>
+
+            <div class="admin-container">
+                <!-- Formulario para agregar/editar puntos -->
+                <div class="admin-form">
+                    <h3 id="form-titulo">➕ Agregar Nuevo Punto</h3>
+                    <form id="puntoForm" class="form">
+                        <input type="hidden" id="puntoId" value="">
+                        
+                        <div class="form-group">
+                            <label for="puntoNombre">Nombre del Punto:</label>
+                            <input type="text" id="puntoNombre" required placeholder="Ej: Biblioteca Central">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="puntoTipo">Tipo de Reciclaje:</label>
+                            <select id="puntoTipo" required>
+                                <option value="mixto">♻️ Mixto</option>
+                                <option value="papel">📄 Papel</option>
+                                <option value="plastico">🔵 Plástico</option>
+                                <option value="organico">🍂 Orgánico</option>
+                                <option value="vidrio">🥫 Vidrio</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="puntoEstado">Estado:</label>
+                            <select id="puntoEstado" required>
+                                <option value="activo">🟢 Activo</option>
+                                <option value="inactivo">🔴 Inactivo</option>
+                                <option value="lleno">🟡 Lleno</option>
+                                <option value="mantenimiento">🛠️ En Mantenimiento</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Posición en el Mapa:</label>
+                            <div class="coordenadas-container">
+                                <div>
+                                    <label for="puntoX">Posición X (0-100):</label>
+                                    <input type="number" id="puntoX" min="0" max="100" value="50" required>
+                                </div>
+                                <div>
+                                    <label for="puntoY">Posición Y (0-100):</label>
+                                    <input type="number" id="puntoY" min="0" max="100" value="50" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="puntoCapacidad">Capacidad Máxima:</label>
+                            <input type="number" id="puntoCapacidad" min="10" max="200" value="100" required>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn" id="btnGuardarPunto">💾 Guardar Punto</button>
+                            <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()" id="btnCancelar">❌ Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Mapa para posicionar puntos -->
+                <div class="admin-mapa">
+                    <h3>📍 Mapa de Posicionamiento</h3>
+                    <div class="mapa-posicionamiento" id="mapa-posicionamiento">
+                        <div class="puntos-container" id="puntos-container">
+                            <!-- Los puntos existentes se mostrarán aquí -->
+                        </div>
+                    </div>
+                    <p class="instrucciones">💡 Haz clic en el mapa para posicionar el punto o arrastra los puntos existentes</p>
+                </div>
+            </div>
+
+            <!-- Lista de puntos existentes -->
+            <div class="lista-puntos-admin">
+                <h3>📋 Puntos de Reciclaje Existentes</h3>
+                <div class="tabla-container">
+                    <table class="tabla-puntos">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Estado</th>
+                                <th>Posición</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-puntos-body">
+                            <!-- Los puntos se cargarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+        <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -447,5 +556,6 @@
 
     <!-- Scripts -->
     <script src="js/script.js"></script>
+    <script src="js/admin-puntos.js"></script>
 </body>
 </html>

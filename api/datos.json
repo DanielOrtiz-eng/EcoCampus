@@ -9,7 +9,7 @@
   "puntos_reciclaje": [
     {
       "id": 1,
-      "nombre": "Alameda Principal",
+      "nombre": "Alameda",
       "tipo": "mixto",
       "estado": "activo",
       "capacidad_actual": 0,
@@ -20,7 +20,7 @@
     },
     {
       "id": 2,
-      "nombre": "Parquesoft - Entrada",
+      "nombre": "Parquesoft",
       "tipo": "papel",
       "estado": "activo",
       "capacidad_actual": 0,
@@ -31,7 +31,7 @@
     },
     {
       "id": 3,
-      "nombre": "Cafetería Central",
+      "nombre": "Cafetería",
       "tipo": "organico",
       "estado": "activo",
       "capacidad_actual": 0,
