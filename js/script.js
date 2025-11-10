@@ -61,66 +61,96 @@ function usarDatosLocales() {
         // Datos iniciales mínimos
         datosGlobales = {
             puntosReciclaje: [
-                { 
-                    id: 1, 
-                    nombre: "Alameda Principal", 
-                    tipo: "mixto", 
-                    estado: "activo", 
-                    capacidad_actual: 0, 
-                    capacidad_maxima: 100, 
-                    ubicacion: { x: 20, y: 25 }, 
-                    reportes: 0 
-                },
-                { 
-                    id: 2, 
-                    nombre: "Parquesoft - Entrada", 
-                    tipo: "papel", 
-                    estado: "activo", 
-                    capacidad_actual: 0, 
-                    capacidad_maxima: 80, 
-                    ubicacion: { x: 70, y: 40 }, 
-                    reportes: 0 
-                },
-                { 
-                    id: 3, 
-                    nombre: "Cafetería Central", 
-                    tipo: "organico", 
-                    estado: "activo", 
-                    capacidad_actual: 0, 
-                    capacidad_maxima: 120, 
-                    ubicacion: { x: 45, y: 65 }, 
-                    reportes: 0 
-                },
-                { 
-                    id: 4, 
-                    nombre: "Entrada Principal", 
-                    tipo: "mixto", 
-                    estado: "activo", 
-                    capacidad_actual: 0, 
-                    capacidad_maxima: 90, 
-                    ubicacion: { x: 15, y: 75 }, 
-                    reportes: 0 
-                },
-                { 
-                    id: 5, 
-                    nombre: "Estacionamiento", 
-                    tipo: "plastico", 
-                    estado: "activo", 
-                    capacidad_actual: 0, 
-                    capacidad_maxima: 70, 
-                    ubicacion: { x: 80, y: 80 }, 
-                    reportes: 0 
-                },
-                { 
-                    id: 6, 
-                    nombre: "Biblioteca", 
-                    tipo: "papel", 
-                    estado: "activo", 
-                    capacidad_actual: 0, 
-                    capacidad_maxima: 60, 
-                    ubicacion: { x: 60, y: 20 }, 
-                    reportes: 0 
-                }
+    { 
+        id: 1, 
+        nombre: "Entrada Principal",
+        tipo: "mixto", 
+        estado: "activo", 
+        capacidad_actual: 0, 
+        capacidad_maxima: 100, 
+        ubicacion: { x: 15, y: 80 }, 
+        reportes: 0 
+    },
+    { 
+        id: 2, 
+        nombre: "Parquesoft",
+        tipo: "papel", 
+        estado: "activo", 
+        capacidad_actual: 0, 
+        capacidad_maxima: 80, 
+        ubicacion: { x: 70, y: 40 }, 
+        reportes: 0 
+    },
+    { 
+        id: 3, 
+        nombre: "Alameda",
+        tipo: "mixto", 
+        estado: "activo", 
+        capacidad_actual: 0, 
+        capacidad_maxima: 120, 
+        ubicacion: { x: 25, y: 30 }, 
+        reportes: 0 
+    },
+    { 
+        id: 4, 
+        nombre: "Cafeteria",
+        tipo: "organico", 
+        estado: "activo", 
+        capacidad_actual: 0, 
+        capacidad_maxima: 90, 
+        ubicacion: { x: 45, y: 60 }, 
+        reportes: 0 
+    },
+    { 
+        id: 5, 
+        nombre: "Cancha Futbol",
+        tipo: "plastico", 
+        estado: "activo", 
+        capacidad_actual: 0, 
+        capacidad_maxima: 70, 
+        ubicacion: { x: 80, y: 70 }, 
+        reportes: 0 
+    },
+    { 
+        id: 6, 
+        nombre: "Cancha Multiple",
+        tipo: "mixto", 
+        estado: "activo", 
+        capacidad_actual: 0, 
+        capacidad_maxima: 60, 
+        ubicacion: { x: 65, y: 85 }, 
+        reportes: 0 
+    },
+    { 
+        id: 7, 
+        nombre: "Cancha VoleyPlaya",
+        tipo: "plastico", 
+        estado: "activo", 
+        capacidad_actual: 0, 
+        capacidad_maxima: 50, 
+        ubicacion: { x: 85, y: 55 }, 
+        reportes: 0 
+    },
+    { 
+        id: 8, 
+        nombre: "Biblioteca",
+        tipo: "papel", 
+        estado: "activo", 
+        capacidad_actual: 0, 
+        capacidad_maxima: 80, 
+        ubicacion: { x: 35, y: 20 }, 
+        reportes: 0 
+    },
+    { 
+        id: 9, 
+        nombre: "Graderia",
+        tipo: "mixto", 
+        estado: "activo", 
+        capacidad_actual: 0, 
+        capacidad_maxima: 100, 
+        ubicacion: { x: 55, y: 75 }, 
+        reportes: 0 
+    }
             ],
             reportes: [],
             estadisticas: {

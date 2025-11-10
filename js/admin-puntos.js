@@ -26,26 +26,18 @@ class AdminPuntos {
     }
 
     configurarMapaPosicionamiento() {
-        const mapa = document.getElementById('mapa-posicionamiento');
-        if (!mapa) return;
+    const mapa = document.getElementById('mapa-posicionamiento');
+    if (!mapa) return;
 
-        // Crear mapa visual para posicionamiento
-        mapa.innerHTML = `
-            <div class="mapa-background">
-                <div class="edificios">
-                    <div class="edificio bloque-a" style="top: 20%; left: 15%;">🏢 Bloque A</div>
-                    <div class="edificio bloque-b" style="top: 35%; left: 60%;">🏢 Bloque B</div>
-                    <div class="edificio cafeteria" style="top: 60%; left: 40%;">🍽 Cafetería</div>
-                    <div class="edificio biblioteca" style="top: 15%; left: 70%;">📚 Biblioteca</div>
-                    <div class="edificio entrada" style="top: 75%; left: 20%;">🚪 Entrada</div>
-                    <div class="edificio estacionamiento" style="top: 80%; left: 75%;">🅿 Estacionamiento</div>
-                </div>
-                <div class="puntos-container" id="puntos-container"></div>
-            </div>
-        `;
+    // Mapa simplificado - solo puntos de recolección
+    mapa.innerHTML = `
+        <div class="mapa-background-simple">
+            <div class="puntos-container" id="puntos-container"></div>
+        </div>
+    `;
 
-        this.actualizarPuntosEnMapaAdmin();
-    }
+    this.actualizarPuntosEnMapaAdmin();
+}
 
     actualizarPuntosEnMapaAdmin() {
         const container = document.getElementById('puntos-container');
