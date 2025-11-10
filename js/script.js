@@ -285,12 +285,28 @@ async function enviarReporte() {
             return;
         }
         ubicacionFinal = otraUbicacion;
+    } else {
+        // ⬇️⬇️⬇️ AGREGAR ESTA PARTE NUEVA ⬇️⬇️⬇️
+        // Mapear los valores del select a nombres de puntos
+        const mapeoUbicaciones = {
+            'entrada_principal': 'Entrada Principal',
+            'parquesoft': 'Parquesoft', 
+            'alameda': 'Alameda',
+            'cafeteria': 'Cafeteria',
+            'cancha_futbol': 'Cancha Futbol',
+            'cancha_multiple': 'Cancha Multiple',
+            'cancha_voleyplaya': 'Cancha VoleyPlaya',
+            'biblioteca': 'Biblioteca',
+            'graderia': 'Graderia'
+        };
+        ubicacionFinal = mapeoUbicaciones[ubicacion] || ubicacion;
+        // ⬆️⬆️⬆️ FIN DE LA PARTE NUEVA ⬆️⬆️⬆️
     }
 
     var nuevoReporte = {
         id: Date.now(),
         tipo: tipo,
-        ubicacion: ubicacionFinal,
+        ubicacion: ubicacionFinal,  // ← Ahora usa ubicacionFinal que está mapeada
         descripcion: descripcion,
         urgencia: urgencia,
         fecha: new Date().toISOString(),
@@ -298,7 +314,7 @@ async function enviarReporte() {
         usuario: 'anonimo_' + Math.random().toString(36).substr(2, 9)
     };
 
-    // Guardar en Netlify
+    // El resto del código se mantiene igual...
     var guardadoExitoso = await guardarEnNetlify('reporte', nuevoReporte);
     
     if (guardadoExitoso) {
